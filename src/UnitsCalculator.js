@@ -1,7 +1,7 @@
 import React from 'react';
 import { calcUnits } from './Calculations';
 
-class Calculator extends React.Component {
+class UnitsCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,9 +15,7 @@ class Calculator extends React.Component {
   }
 
   handleSubmit(event) {
-    // const units = (this.state.quantity * this.state.abv) / 1000
     const units = calcUnits(this.state.quantity, this.state.abv)
-    console.log('units =' , units);
     this.setState({
       units: units
     });
@@ -35,13 +33,14 @@ class Calculator extends React.Component {
 
   render() {
     return (
-      <div className="Calculator">
+      <div className="UnitsCalculator">
         <form onSubmit={this.handleSubmit}>
           <label>
               Quantity
               <input
                 type="number"
                 name="quantity"
+                aria-label="quantity-input"
                 value={this.state.quantity}
                 onChange={this.handleInputChange}
               />
@@ -52,6 +51,7 @@ class Calculator extends React.Component {
               <input
                 type="number"
                 name="abv"
+                aria-label="abv-input"
                 value={this.state.abv}
                 onChange={this.handleInputChange}
               />
@@ -59,11 +59,11 @@ class Calculator extends React.Component {
           </label>
           <input type="submit" value="Calculate units" className="calc-units" />
           <div>Calculated units =</div>
-          <div className="units-display" >{this.state.units}</div>
+          <div className="units-display" aria-label="units-display" >{this.state.units}</div>
         </form>
       </div>
     );
   }
 }
 
-export default Calculator;
+export default UnitsCalculator;

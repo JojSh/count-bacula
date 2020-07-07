@@ -14,7 +14,7 @@
   color: #282c34;
 }
 
-.App .Calculator form {
+.App .UnitsCalculator form {
   flex-direction: column;
   display: flex;
   .calc-units {
@@ -23,6 +23,6 @@
 }
 
 
-.App .Calculator form input {
+.App .UnitsCalculator form input {
   margin: 5px;
 }

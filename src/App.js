@@ -1,12 +1,9 @@
 import React from 'react';
-import Calculator from './Calculator';
+import UnitsCalculator from './UnitsCalculator';
 import './App.scss';
 
 class App extends React.Component {
-  constructor() {
-    super();
-  }
-
+  
   render() {
     return (
       <div className="App">
@@ -15,7 +12,7 @@ class App extends React.Component {
             Count BACular
           </p>
         </header>
-        <Calculator >Some stuff</Calculator>
+        <UnitsCalculator >Some stuff</UnitsCalculator>
       </div>
     );
   }
