@@ -56,7 +56,7 @@ class Calculator extends React.Component {
               %
           </label>
           <input type="submit" value="Calculate units" className="calc-units" />
-          <div> Calculated units =</div>
+          <div>Calculated units =</div>
           <div className="units-display" >{this.state.units}</div>
         </form>
       </div>
