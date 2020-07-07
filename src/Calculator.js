@@ -1,4 +1,5 @@
 import React from 'react';
+import { calcUnits } from './Calculations';
 
 class Calculator extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class Calculator extends React.Component {
   }
 
   handleSubmit(event) {
-    const units = (this.state.quantity * this.state.abv) / 1000
+    // const units = (this.state.quantity * this.state.abv) / 1000
+    const units = calcUnits(this.state.quantity, this.state.abv)
     console.log('units =' , units);
     this.setState({
       units: units
