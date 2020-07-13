@@ -905,7 +905,7 @@ module.exports = function (list, options) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".App{text-align:center;min-height:100vh}.App-header{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:calc(10px + 2vmin);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#282c34}.App{font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",\"Roboto\",\"Oxygen\",\"Ubuntu\",\"Cantarell\",\"Fira Sans\",\"Droid Sans\",\"Helvetica Neue\",sans-serif}.App .UnitsCalculator form{flex-direction:column;display:flex}.App .UnitsCalculator form .calc-units{align-self:center;font-family:source-code-pro,Menlo,Monaco,Consolas,\"Courier New\",monospace}.App .UnitsCalculator form input{margin:5px}body{margin:0}", ""]);
+exports.push([module.i, ".App{text-align:center;min-height:100vh}.App-header{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:calc(10px + 2vmin);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#282c34}.App{font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",\"Roboto\",\"Oxygen\",\"Ubuntu\",\"Cantarell\",\"Fira Sans\",\"Droid Sans\",\"Helvetica Neue\",sans-serif}.App .UnitsCalculator form{flex-direction:column;display:flex}.App .UnitsCalculator form .calc-units{align-self:center;font-family:source-code-pro,Menlo,Monaco,Consolas,\"Courier New\",monospace}.App .UnitsCalculator form input{margin:5px}", ""]);
 // Exports
 module.exports = exports;
 
@@ -1027,12 +1027,9 @@ var react_dom = __webpack_require__(2);
 var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 
 // CONCATENATED MODULE: ./app/client/Calculations.js
-var calcUnits = function calcUnits(quantity, abv) {
+function calcUnits(quantity, abv) {
   return abv * quantity / 1000;
-};
-/* harmony default export */ var Calculations = ({
-  calcUnits: calcUnits
-});
+}
 // CONCATENATED MODULE: ./app/client/UnitsCalculator.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1133,9 +1130,6 @@ var UnitsCalculator_UnitsCalculator = /*#__PURE__*/function (_React$Component) {
 }(react_default.a.Component);
 
 /* harmony default export */ var client_UnitsCalculator = (UnitsCalculator_UnitsCalculator);
-// EXTERNAL MODULE: ./app/client/App.scss
-var client_App = __webpack_require__(7);
-
 // CONCATENATED MODULE: ./app/client/App.js
 function App_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { App_typeof = function _typeof(obj) { return typeof obj; }; } else { App_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return App_typeof(obj); }
 
@@ -1158,7 +1152,6 @@ function App_assertThisInitialized(self) { if (self === void 0) { throw new Refe
 function App_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function App_getPrototypeOf(o) { App_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return App_getPrototypeOf(o); }
-
 
 
 
@@ -1188,12 +1181,16 @@ var App_App = /*#__PURE__*/function (_React$Component) {
   return App;
 }(react_default.a.Component);
 
-/* harmony default export */ var app_client_App = (App_App);
+/* harmony default export */ var client_App = (App_App);
+// EXTERNAL MODULE: ./app/client/App.scss
+var app_client_App = __webpack_require__(7);
+
 // CONCATENATED MODULE: ./app/client/index.js
 
 
 
-react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(react_default.a.StrictMode, null, /*#__PURE__*/react_default.a.createElement(app_client_App, null)), document.getElementById('count-bacula'));
+
+react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(react_default.a.StrictMode, null, /*#__PURE__*/react_default.a.createElement(client_App, null)), document.getElementById('count-bacula'));
 
 /***/ })
 /******/ ]);

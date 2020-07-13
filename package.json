@@ -4,8 +4,6 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -13,7 +11,8 @@
   },
   "scripts": {
     "start": "node App/server",
-    "build": "webpack -p --progress --colors"
+    "build": "webpack -p --progress --colors",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,13 +30,17 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
     "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/react": "^10.4.5",
     "@testing-library/user-event": "^12.0.11",
+    "babel-jest": "^26.1.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "^26.1.0",
     "react-test-renderer": "^16.13.1",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
