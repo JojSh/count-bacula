@@ -8,18 +8,19 @@ class UnitsCalculator extends React.Component {
       quantity: '',
       abv: '',
       units: '',
+      drinkStore: [],
+      totalUnits: 0,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSaveDrink = this.handleSaveDrink.bind(this);
   }
 
-  handleSubmit(event) {
+  updateUnits(event) {
     const units = calcUnits(this.state.quantity, this.state.abv)
     this.setState({
       units: units
     });
-    event.preventDefault();
   }
 
   handleInputChange(event) {
@@ -28,13 +29,31 @@ class UnitsCalculator extends React.Component {
 
     this.setState({
       [name]: Number(value)
+    }, () => {
+      this.updateUnits(event);
     });
   }
+
+  handleSaveDrink(event) {
+    const drinkToSave = {
+      units: this.state.units,
+      timeStamp: new Date().getTime(),
+    }
+    const drinksSoFar = this.state.drinkStore
+    const unitsSoFar = this.state.totalUnits
+    event.preventDefault();
+    this.setState({
+      drinkStore: [...drinksSoFar, drinkToSave],
+      totalUnits: unitsSoFar + drinkToSave.units
+    });
+  }
+
+
 
   render() {
     return (
       <div className="UnitsCalculator">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSaveDrink}>
           <label>
               Quantity
               <input
@@ -57,9 +76,16 @@ class UnitsCalculator extends React.Component {
               />
               %
           </label>
-          <input type="submit" value="Calculate units" className="calc-units" />
-          <div>Calculated units =</div>
-          <div className="units-display" aria-label="units-display" >{this.state.units}</div>
+          <div
+            className="units-display"
+            aria-label="units-display"
+          >= {this.state.units}</div>
+          <input type="submit" value="Add drink" className="save-drink" />
+          {
+            this.state.totalUnits > 0
+            ? (<div className="total-units" aria-label="total-units">Total units = {this.state.totalUnits}</div>)
+            : null
+          }
         </form>
       </div>
     );

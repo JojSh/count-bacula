@@ -9,7 +9,7 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <p>
-            Count BACular
+            Count BACula
           </p>
         </header>
         <UnitsCalculator />

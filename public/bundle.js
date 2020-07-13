@@ -905,7 +905,7 @@ module.exports = function (list, options) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".App{text-align:center;min-height:100vh}.App-header{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:calc(10px + 2vmin);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#282c34}.App{font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",\"Roboto\",\"Oxygen\",\"Ubuntu\",\"Cantarell\",\"Fira Sans\",\"Droid Sans\",\"Helvetica Neue\",sans-serif}.App .UnitsCalculator form{flex-direction:column;display:flex}.App .UnitsCalculator form .calc-units{align-self:center;font-family:source-code-pro,Menlo,Monaco,Consolas,\"Courier New\",monospace}.App .UnitsCalculator form input{margin:5px}", ""]);
+exports.push([module.i, ".App{text-align:center;min-height:100vh}.App-header{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:calc(10px + 2vmin);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#282c34}.App{font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",\"Roboto\",\"Oxygen\",\"Ubuntu\",\"Cantarell\",\"Fira Sans\",\"Droid Sans\",\"Helvetica Neue\",sans-serif}.App .UnitsCalculator form{flex-direction:column;display:flex}.App .UnitsCalculator form .save-drink{align-self:center;font-family:source-code-pro,Menlo,Monaco,Consolas,\"Courier New\",monospace}.App .UnitsCalculator form input{margin:5px}", ""]);
 // Exports
 module.exports = exports;
 
@@ -1033,6 +1033,18 @@ function calcUnits(quantity, abv) {
 // CONCATENATED MODULE: ./app/client/UnitsCalculator.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1072,37 +1084,65 @@ var UnitsCalculator_UnitsCalculator = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       quantity: '',
       abv: '',
-      units: ''
+      units: '',
+      drinkStore: [],
+      totalUnits: 0
     };
     _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleSaveDrink = _this.handleSaveDrink.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(UnitsCalculator, [{
-    key: "handleSubmit",
-    value: function handleSubmit(event) {
+    key: "updateUnits",
+    value: function updateUnits(event) {
       var units = calcUnits(this.state.quantity, this.state.abv);
       this.setState({
         units: units
-      });
-      event.preventDefault();
+      }); // event.preventDefault();
     }
   }, {
     key: "handleInputChange",
     value: function handleInputChange(event) {
+      var _this2 = this;
+
       var target = event.target;
       var value = target.value,
           name = target.name;
-      this.setState(_defineProperty({}, name, Number(value)));
+      this.setState(_defineProperty({}, name, Number(value)), function () {
+        _this2.updateUnits(event);
+      });
+    }
+  }, {
+    key: "handleSaveDrink",
+    value: function handleSaveDrink(event) {
+      var _this3 = this;
+
+      var drinkToSave = {
+        units: this.state.units,
+        timeStamp: new Date().getTime()
+      };
+      var drinksSoFar = this.state.drinkStore;
+      var unitsSoFar = this.state.totalUnits;
+      event.preventDefault();
+      this.setState({
+        drinkStore: [].concat(_toConsumableArray(drinksSoFar), [drinkToSave]),
+        totalUnits: unitsSoFar + drinkToSave.units
+      }, function () {
+        console.log(_this3.state.drinkStore);
+      }); // const units = calcUnits(this.state.quantity, this.state.abv)
+      // this.setState({
+      //   units: units
+      // });
     }
   }, {
     key: "render",
     value: function render() {
+      // const showUnits = this.state.totalUnits >= 1
       return /*#__PURE__*/react_default.a.createElement("div", {
         className: "UnitsCalculator"
       }, /*#__PURE__*/react_default.a.createElement("form", {
-        onSubmit: this.handleSubmit
+        onSubmit: this.handleSaveDrink
       }, /*#__PURE__*/react_default.a.createElement("label", null, "Quantity", /*#__PURE__*/react_default.a.createElement("input", {
         type: "number",
         name: "quantity",
@@ -1115,14 +1155,16 @@ var UnitsCalculator_UnitsCalculator = /*#__PURE__*/function (_React$Component) {
         "aria-label": "abv-input",
         value: this.state.abv,
         onChange: this.handleInputChange
-      }), "%"), /*#__PURE__*/react_default.a.createElement("input", {
-        type: "submit",
-        value: "Calculate units",
-        className: "calc-units"
-      }), /*#__PURE__*/react_default.a.createElement("div", null, "Calculated units ="), /*#__PURE__*/react_default.a.createElement("div", {
+      }), "%"), /*#__PURE__*/react_default.a.createElement("div", {
         className: "units-display",
         "aria-label": "units-display"
-      }, this.state.units)));
+      }, "= ", this.state.units), /*#__PURE__*/react_default.a.createElement("input", {
+        type: "submit",
+        value: "Add drink",
+        className: "save-drink"
+      }), this.state.totalUnits > 0 ? /*#__PURE__*/react_default.a.createElement("div", {
+        className: "total-units"
+      }, "Total units = ", this.state.totalUnits) : null));
     }
   }]);
 
@@ -1130,6 +1172,9 @@ var UnitsCalculator_UnitsCalculator = /*#__PURE__*/function (_React$Component) {
 }(react_default.a.Component);
 
 /* harmony default export */ var client_UnitsCalculator = (UnitsCalculator_UnitsCalculator);
+// EXTERNAL MODULE: ./app/client/App.scss
+var client_App = __webpack_require__(7);
+
 // CONCATENATED MODULE: ./app/client/App.js
 function App_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { App_typeof = function _typeof(obj) { return typeof obj; }; } else { App_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return App_typeof(obj); }
 
@@ -1156,6 +1201,7 @@ function App_getPrototypeOf(o) { App_getPrototypeOf = Object.setPrototypeOf ? Ob
 
 
 
+
 var App_App = /*#__PURE__*/function (_React$Component) {
   App_inherits(App, _React$Component);
 
@@ -1174,23 +1220,19 @@ var App_App = /*#__PURE__*/function (_React$Component) {
         className: "App"
       }, /*#__PURE__*/react_default.a.createElement("header", {
         className: "App-header"
-      }, /*#__PURE__*/react_default.a.createElement("p", null, "Count BACular")), /*#__PURE__*/react_default.a.createElement(client_UnitsCalculator, null));
+      }, /*#__PURE__*/react_default.a.createElement("p", null, "Count BACula")), /*#__PURE__*/react_default.a.createElement(client_UnitsCalculator, null));
     }
   }]);
 
   return App;
 }(react_default.a.Component);
 
-/* harmony default export */ var client_App = (App_App);
-// EXTERNAL MODULE: ./app/client/App.scss
-var app_client_App = __webpack_require__(7);
-
+/* harmony default export */ var app_client_App = (App_App);
 // CONCATENATED MODULE: ./app/client/index.js
 
 
 
-
-react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(react_default.a.StrictMode, null, /*#__PURE__*/react_default.a.createElement(client_App, null)), document.getElementById('count-bacula'));
+react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(react_default.a.StrictMode, null, /*#__PURE__*/react_default.a.createElement(app_client_App, null)), document.getElementById('count-bacula'));
 
 /***/ })
 /******/ ]);

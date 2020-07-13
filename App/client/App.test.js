@@ -7,7 +7,7 @@ configure({ adapter: new Adapter() });
 
 it('renders welcome message', () => {
   const wrapper = shallow(<App />);
-  const title = <p>Count BACular</p>;
+  const title = <p>Count BACula</p>;
 
   expect(wrapper.contains(title)).toEqual(true);
 });
