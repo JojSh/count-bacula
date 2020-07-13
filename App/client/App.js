@@ -12,7 +12,7 @@ class App extends React.Component {
             Count BACular
           </p>
         </header>
-        <UnitsCalculator >Some stuff</UnitsCalculator>
+        <UnitsCalculator />
       </div>
     );
   }
