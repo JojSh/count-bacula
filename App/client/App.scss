@@ -1,19 +1,52 @@
 .App {
   text-align: center;
-  /* background-color: #282c34; */
   min-height: 100vh;
+  max-width: 1300px;
+  margin: 1rem auto;
+
+  .App-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #282c34;
+  }
+
+  .top-row {
+    display: flex;
+    section {
+      flex-grow: 1;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      border-style: dotted; // }
+      border-width: 1px; // }         temp, remove later
+      border-color: lightgrey; // }
+      h1 {
+        font-weight: normal;
+      }
+    }
+
+    .DrinkCalculator form {
+      flex-direction: column;
+      display: flex;
+
+      .save-drink {
+        align-self: center;
+        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+      }
+    }
+
+    .DrinkCalculator form input {
+      margin: 5px;
+    }
+  }
 }
 
-.App-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #282c34;
-}
+
 
 .App {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -21,16 +54,4 @@
   sans-serif;
 }
 
-.App .UnitsCalculator form {
-  flex-direction: column;
-  display: flex;
-  .save-drink {
-    align-self: center;
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-  }
-}
 
-.App .UnitsCalculator form input {
-  margin: 5px;
-}

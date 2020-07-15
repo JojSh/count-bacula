@@ -1,7 +1,7 @@
 import React from 'react';
 import { calcUnits } from './Calculations';
 
-class UnitsCalculator extends React.Component {
+class DrinkCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +13,6 @@ class UnitsCalculator extends React.Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSaveDrink = this.handleSaveDrink.bind(this);
   }
 
   updateUnits(event) {
@@ -34,26 +33,10 @@ class UnitsCalculator extends React.Component {
     });
   }
 
-  handleSaveDrink(event) {
-    const drinkToSave = {
-      units: this.state.units,
-      timeStamp: new Date().getTime(),
-    }
-    const drinksSoFar = this.state.drinkStore
-    const unitsSoFar = this.state.totalUnits
-    event.preventDefault();
-    this.setState({
-      drinkStore: [...drinksSoFar, drinkToSave],
-      totalUnits: unitsSoFar + drinkToSave.units
-    });
-  }
-
-
-
   render() {
     return (
-      <div className="UnitsCalculator">
-        <form onSubmit={this.handleSaveDrink}>
+      <section className="DrinkCalculator">
+        <form onSubmit={(event) => this.props.handleSaveDrink(event, this.state.units)}>
           <label>
               Quantity
               <input
@@ -83,13 +66,13 @@ class UnitsCalculator extends React.Component {
           <input type="submit" value="Add drink" className="save-drink" />
           {
             this.state.totalUnits > 0
-            ? (<div className="total-units" aria-label="total-units">Total units = {this.state.totalUnits}</div>)
+            ? (<div className="total-units" >Total units = {this.state.totalUnits}</div>)
             : null
           }
         </form>
-      </div>
+      </section>
     );
   }
 }
 
-export default UnitsCalculator;
+export default DrinkCalculator;
