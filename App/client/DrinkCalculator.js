@@ -5,8 +5,8 @@ class DrinkCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: '',
-      abv: '',
+      quantity: 440,
+      abv: 6,
       units: '',
       drinkStore: [],
       totalUnits: 0,
@@ -15,11 +15,9 @@ class DrinkCalculator extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  updateUnits(event) {
+  updateUnits() {
     const units = calcUnits(this.state.quantity, this.state.abv)
-    this.setState({
-      units: units
-    });
+    this.setState({ units });
   }
 
   handleInputChange(event) {
@@ -31,6 +29,10 @@ class DrinkCalculator extends React.Component {
     }, () => {
       this.updateUnits(event);
     });
+  }
+
+  componentDidMount() {
+    this.updateUnits()
   }
 
   render() {

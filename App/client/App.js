@@ -1,7 +1,10 @@
 import React from 'react';
 import DrinkCalculator from './DrinkCalculator';
+import { calcUnitsMetabBy } from './Calculations';
 import TotalUnits from './TotalUnits';
 import Clock from './Clock';
+import DrinksList from './DrinksList';
+import BedTime from './BedTime';
 import './App.scss';
 
 class App extends React.Component {
@@ -10,6 +13,7 @@ class App extends React.Component {
     this.state = {
       drinkStore: [],
       totalUnits: 0,
+      bedTimeUnits: 0,
     }
 
     this.handleSaveDrink = this.handleSaveDrink.bind(this);
@@ -21,9 +25,16 @@ class App extends React.Component {
       units: units,
       timeStamp: new Date().getTime(),
     }
+    const unitsToSave = Number((this.state.totalUnits + drinkToSave.units).toFixed(3))
+    const timeNow = new Date()
+    const bedTimeToday = new Date()
+    bedTimeToday.setHours(23)
+    bedTimeToday.setMinutes(0)
+
     this.setState(() => ({
       drinkStore: [...this.state.drinkStore, drinkToSave],
-      totalUnits: this.state.totalUnits + drinkToSave.units
+      totalUnits: unitsToSave,
+      bedTimeUnits: calcUnitsMetabBy(unitsToSave, bedTimeToday, timeNow)
     }));
   }
 
@@ -39,6 +50,10 @@ class App extends React.Component {
           <DrinkCalculator handleSaveDrink={this.handleSaveDrink}/>
           <TotalUnits totalUnits={this.state.totalUnits}/>
           <Clock />
+        </div>
+        <div className="bottom-row">
+          <DrinksList drinkStore={this.state.drinkStore}/>
+          <BedTime bedTimeUnits={this.state.bedTimeUnits}/>
         </div>
         
       </div>
