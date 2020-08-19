@@ -37,11 +37,17 @@
     .DrinkCalculator form {
       flex-direction: column;
       display: flex;
+      justify-content: center;
+      align-items: center;
 
       .save-drink {
         align-self: center;
         font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
+      }
+
+      .units-display {
+        padding-top: 12px;
       }
     }
 
@@ -81,6 +87,9 @@
   }
 }
 
+.EditableTime {
+  display: flex;
+}
 
 
 .App {

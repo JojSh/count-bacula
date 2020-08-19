@@ -1,18 +1,20 @@
 import React from 'react';
 import { calcUnits } from './Calculations';
+import EditableTime from './generic/EditableTime';
 
 class DrinkCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: 440,
-      abv: 6,
+      quantity: 500,
+      abv: 4,
       units: '',
-      drinkStore: [],
+      drinkTime: new Date().getTime(),
       totalUnits: 0,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleTimeChange = this.handleTimeChange.bind(this);
   }
 
   updateUnits() {
@@ -31,6 +33,10 @@ class DrinkCalculator extends React.Component {
     });
   }
 
+  handleTimeChange(newTime) {
+    this.setState({ drinkTime: newTime });
+  }
+
   componentDidMount() {
     this.updateUnits()
   }
@@ -38,7 +44,7 @@ class DrinkCalculator extends React.Component {
   render() {
     return (
       <section className="DrinkCalculator">
-        <form onSubmit={(event) => this.props.handleSaveDrink(event, this.state.units)}>
+        <form onSubmit={(event) => this.props.handleSaveDrink(event, this.state.units, this.state.drinkTime)}>
           <label>
               Quantity
               <input
@@ -60,6 +66,9 @@ class DrinkCalculator extends React.Component {
                 onChange={this.handleInputChange}
               />
               %
+          </label>
+          <label>
+            <EditableTime handleTimeChange={this.handleTimeChange}/>
           </label>
           <div
             className="units-display"

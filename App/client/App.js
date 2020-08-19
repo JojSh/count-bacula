@@ -19,14 +19,13 @@ class App extends React.Component {
     this.handleSaveDrink = this.handleSaveDrink.bind(this);
   }
 
-  handleSaveDrink(event, units) {
+  handleSaveDrink(event, units, timeStamp) {
     event.preventDefault();
     const drinkToSave = {
       units: units,
-      timeStamp: new Date().getTime(),
+      timeStamp: timeStamp,
     }
     const unitsToSave = Number((this.state.totalUnits + drinkToSave.units).toFixed(3))
-    const timeNow = new Date()
     const bedTimeToday = new Date()
     bedTimeToday.setHours(23)
     bedTimeToday.setMinutes(0)
@@ -34,7 +33,7 @@ class App extends React.Component {
     this.setState(() => ({
       drinkStore: [...this.state.drinkStore, drinkToSave],
       totalUnits: unitsToSave,
-      bedTimeUnits: calcUnitsMetabBy(unitsToSave, bedTimeToday, timeNow)
+      bedTimeUnits: calcUnitsMetabBy(unitsToSave, bedTimeToday, timeStamp)
     }));
   }
 
