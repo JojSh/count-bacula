@@ -5,13 +5,24 @@
   "dependencies": {
     "@babel/core": "^7.10.4",
     "express": "^4.17.1",
+    "npm-watch": "^0.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "sass": "^1.26.9"
   },
+  "watch": {
+    "build-and-start": {
+      "patterns": [
+        "App"
+      ],
+      "extensions": "js,jsx"
+    }
+  }, 
   "scripts": {
+    "watch": "npm-watch",
     "start": "node App/server",
     "build": "webpack -p --progress --colors",
+    "build-and-start": "webpack -p --progress --colors && node App/server",
     "test": "jest"
   },
   "eslintConfig": {
