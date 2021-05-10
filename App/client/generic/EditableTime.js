@@ -7,28 +7,9 @@ class EditableTime extends React.Component {
     this.state = {
       showMinutes: false,
       currentTime: new Date(),
-      hours: [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-        14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
-      ],
-      minutes: [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
-        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-        31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-        41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 58, 59,
-      ],
-      seconds: [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
-        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-        31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-        41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 58, 59,
-      ],
     }
     this.toggleSelected = this.toggleSelected.bind(this);
+    this.handleEditTime = this.handleEditTime.bind(this);
   }
 
   toggleSelected(value, timeKey) {
@@ -38,39 +19,76 @@ class EditableTime extends React.Component {
     this.setState({
       currentTime: newTime
     }, () => {
-      this.props.handleTimeChange(this.state.currentTime)
+      this.props.handleTimeChange(this.state.currentTime.getTime())
     })
   }
 
+
+  handleEditTime(event) {
+    const { target } = event;
+    const { value, name } = target;
+    const newTime = this.state.currentTime
+
+    if (name === 'hour') newTime.setHours(value)
+    if (name === 'minute') newTime.setMinutes(value)
+    newTime.setSeconds(0)
+
+    this.setState({
+      currentTime: newTime
+    }, () => {
+      this.props.handleTimeChange(this.state.currentTime.getTime())
+    })
+
+
+
+    // this.setState({
+    //   hour: Number(value)
+    // }, () => {
+    //   this.updateUnits(event);
+    // });
+
+  }
+
   render() {
-    const hour = this.state.currentTime.getHours();
+    let hour = this.state.currentTime.getHours();
     const minute = this.state.currentTime.getMinutes();
     const second = this.state.currentTime.getSeconds();
     return(
       <div className="EditableTime">
         <span className="hours">
-          <Dropdown
-            title='hour'
+          <input
+            type="number"
+            name="hour"
+            aria-label="hour-input"
             value={hour}
-            list={this.state.hours}
-            toggleSelected={this.toggleSelected}
+            onChange={this.handleEditTime}
           />
         </span>
         <span className="minutes">
+          <input
+            type="number"
+            name="minute"
+            aria-label="minute-input"
+            value={minute}
+            onChange={this.handleEditTime}
+          />
+        </span>
+        {/* <span className="minutes">
           :<Dropdown
             title='minute'
             value={minute}
             list={this.state.minutes}
             toggleSelected={this.toggleSelected}
           />
-        </span>
-        { this.state.showMinutes && <span className="seconds">
+        </span> */}
+
+        {/* { this.state.showMinutes && <span className="seconds">
           :<Dropdown
             title='second'
             value={second}
             list={this.state.seconds}
           />
-        </span> }
+        </span> } */}
       </div>
     )
   }
