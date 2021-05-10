@@ -1,6 +1,10 @@
 {
   "name": "count-bacula",
   "version": "0.1.0",
+  "engines": {
+    "node": "13.x",
+    "npm": "6.x"
+  },
   "private": true,
   "dependencies": {
     "@babel/core": "^7.10.4",
@@ -9,9 +13,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "sass": "^1.26.9"
-  },
-  "engines": {
-    "node": "13.x"
   },
   "watch": {
     "build-and-start": {
