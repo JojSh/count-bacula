@@ -21,7 +21,7 @@
       ],
       "extensions": "js,jsx"
     }
-  }, 
+  },
   "scripts": {
     "watch": "npm-watch",
     "start": "node App/server",

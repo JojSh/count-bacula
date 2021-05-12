@@ -8,7 +8,7 @@ const env = process.env.NODE_ENV || 'development'
 module.exports = {
   mode: env,
   optimization: { minimize: env === 'production' },
-  entry: `${APP_DIR}/index.js`,
+  entry: `${BUILD_DIR}/index.js`,
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
