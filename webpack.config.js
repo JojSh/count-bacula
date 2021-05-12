@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 
-const APP_DIR = `${__dirname}/app/client`
+const APP_DIR = `${__dirname}/App/client`
 const BUILD_DIR = `${__dirname}/public`
 
 const env = process.env.NODE_ENV || 'development'
@@ -8,7 +8,7 @@ const env = process.env.NODE_ENV || 'development'
 module.exports = {
   mode: env,
   optimization: { minimize: env === 'production' },
-  entry: `/App/client/index.js`,
+  entry: `${APP_DIR}/index.js`,
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
