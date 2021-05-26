@@ -44,7 +44,7 @@ class DrinkCalculator extends React.Component {
   render () {
     return (
       <section className='DrinkCalculator'>
-        <form onSubmit={event => this.props.handleSaveDrink(event, this.state.units, this.state.drinkTime)}>
+        <form onSubmit={event => this.props.onSaveDrink(event, this.state.units, this.state.drinkTime)}>
           <label>
             Quantity
             <input
@@ -68,7 +68,7 @@ class DrinkCalculator extends React.Component {
             %
           </label>
           <label>
-            <EditableTime handleTimeChange={this.handleTimeChange} />
+            <EditableTime onTimeChange={this.handleTimeChange} />
           </label>
           <div
             className='units-display'
@@ -82,7 +82,7 @@ class DrinkCalculator extends React.Component {
               : null
           }
         </form>
-        <button onClick={() => this.props.handleRemoveLastDrink()}> Remove the last drink</button>
+        <button onClick={() => this.props.onRemoveLastDrink()}> Remove the last drink</button>
       </section>
     )
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import Dropdown from './Dropdown'
+// import Dropdown from './Dropdown'
 
 class EditableTime extends React.Component {
   constructor (props) {
@@ -19,7 +19,7 @@ class EditableTime extends React.Component {
     this.setState({
       currentTime: newTime
     }, () => {
-      this.props.handleTimeChange(this.state.currentTime.getTime())
+      this.props.onTimeChange(this.state.currentTime.getTime())
     })
   }
 
@@ -35,7 +35,7 @@ class EditableTime extends React.Component {
     this.setState({
       currentTime: newTime
     }, () => {
-      this.props.handleTimeChange(this.state.currentTime.getTime())
+      this.props.onTimeChange(this.state.currentTime.getTime())
     })
 
     // this.setState({
@@ -48,7 +48,7 @@ class EditableTime extends React.Component {
   render () {
     const hour = this.state.currentTime.getHours()
     const minute = this.state.currentTime.getMinutes()
-    const second = this.state.currentTime.getSeconds()
+    // const second = this.state.currentTime.getSeconds()
     return (
       <div className='EditableTime'>
         <span className='hours'>

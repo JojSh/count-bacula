@@ -65,7 +65,7 @@ class App extends React.Component {
           </p>
         </header>
         <div className='top-row'>
-          <DrinkCalculator handleSaveDrink={this.handleSaveDrink} handleRemoveLastDrink={this.handleRemoveLastDrink} />
+          <DrinkCalculator onSaveDrink={this.handleSaveDrink} onRemoveLastDrink={this.handleRemoveLastDrink} />
           <TotalUnits totalUnits={this.state.totalUnits} />
           <Clock />
         </div>

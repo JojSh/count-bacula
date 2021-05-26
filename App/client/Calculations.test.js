@@ -1,3 +1,4 @@
+/* eslint-env jest */
 import { calcUnits, calcUnitsMetabBy } from './Calculations'
 
 describe('calcUnits', () => {
