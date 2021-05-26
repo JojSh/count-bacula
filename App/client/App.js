@@ -1,30 +1,30 @@
-import React from 'react';
-import DrinkCalculator from './DrinkCalculator';
-import { calcUnitsMetabBy } from './Calculations';
-import TotalUnits from './TotalUnits';
-import Clock from './Clock';
-import DrinksList from './DrinksList';
-import BedTime from './BedTime';
-import './App.scss';
+import React from 'react'
+import DrinkCalculator from './DrinkCalculator'
+import { calcUnitsMetabBy } from './Calculations'
+import TotalUnits from './TotalUnits'
+import Clock from './Clock'
+import DrinksList from './DrinksList'
+import BedTime from './BedTime'
+import './App.scss'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       drinkStore: [],
       totalUnits: 0,
-      bedTimeUnits: 0,
+      bedTimeUnits: 0
     }
 
-    this.handleSaveDrink = this.handleSaveDrink.bind(this);
-    this.handleRemoveLastDrink = this.handleRemoveLastDrink.bind(this);
+    this.handleSaveDrink = this.handleSaveDrink.bind(this)
+    this.handleRemoveLastDrink = this.handleRemoveLastDrink.bind(this)
   }
 
-  handleSaveDrink(event, units, timeStamp) {
-    event.preventDefault();
+  handleSaveDrink (event, units, timeStamp) {
+    event.preventDefault()
     const drinkToSave = {
       units: units,
-      timeStamp: timeStamp,
+      timeStamp: timeStamp
     }
 
     const unitsToSave = Number((this.state.totalUnits + drinkToSave.units).toFixed(3))
@@ -33,7 +33,7 @@ class App extends React.Component {
       drinkStore: [...this.state.drinkStore, drinkToSave],
       totalUnits: unitsToSave,
       bedTimeUnits: calcUnitsMetabBy(unitsToSave, this.getBedTimeToday(), timeStamp)
-    }));
+    }))
   }
 
   handleRemoveLastDrink () {
@@ -46,7 +46,7 @@ class App extends React.Component {
     this.setState(() => ({
       drinkStore: drinksAfterLastRemoved,
       totalUnits: unitsToSave
-    }));
+    }))
   }
 
   getBedTimeToday () {
@@ -56,27 +56,27 @@ class App extends React.Component {
     return bedTimeToday
   }
 
-  render() {
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p aria-label="app-title">
+      <div className='App'>
+        <header className='App-header'>
+          <p aria-label='app-title'>
             Count BACula
           </p>
         </header>
-        <div className="top-row">
-          <DrinkCalculator handleSaveDrink={this.handleSaveDrink} handleRemoveLastDrink={this.handleRemoveLastDrink}/>
-          <TotalUnits totalUnits={this.state.totalUnits}/>
+        <div className='top-row'>
+          <DrinkCalculator handleSaveDrink={this.handleSaveDrink} handleRemoveLastDrink={this.handleRemoveLastDrink} />
+          <TotalUnits totalUnits={this.state.totalUnits} />
           <Clock />
         </div>
-        <div className="bottom-row">
-          <DrinksList drinkStore={this.state.drinkStore}/>
-          <BedTime bedTimeUnits={this.state.bedTimeUnits}/>
+        <div className='bottom-row'>
+          <DrinksList drinkStore={this.state.drinkStore} />
+          <BedTime bedTimeUnits={this.state.bedTimeUnits} />
         </div>
-        
+
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

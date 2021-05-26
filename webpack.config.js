@@ -1,7 +1,8 @@
+/* eslint-disable */
 const webpack = require('webpack')
-
 const APP_DIR = `${__dirname}/App/client`
 const BUILD_DIR = `${__dirname}/public`
+/* eslint-enable */
 
 const env = process.env.NODE_ENV || 'development'
 
@@ -33,8 +34,8 @@ module.exports = {
           // Translates CSS into CommonJS
           'css-loader',
           // Compiles Sass to CSS
-          'sass-loader',
-        ],
+          'sass-loader'
+        ]
       }
     ]
   }

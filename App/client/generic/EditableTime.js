@@ -1,18 +1,18 @@
-import React from 'react';
-import Dropdown from './Dropdown';
+import React from 'react'
+import Dropdown from './Dropdown'
 
 class EditableTime extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       showMinutes: false,
-      currentTime: new Date(),
+      currentTime: new Date()
     }
-    this.toggleSelected = this.toggleSelected.bind(this);
-    this.handleEditTime = this.handleEditTime.bind(this);
+    this.toggleSelected = this.toggleSelected.bind(this)
+    this.handleEditTime = this.handleEditTime.bind(this)
   }
 
-  toggleSelected(value, timeKey) {
+  toggleSelected (value, timeKey) {
     const newTime = this.state.currentTime
     if (timeKey === 'hour') newTime.setHours(value)
     if (timeKey === 'minute') newTime.setMinutes(value)
@@ -23,10 +23,9 @@ class EditableTime extends React.Component {
     })
   }
 
-
-  handleEditTime(event) {
-    const { target } = event;
-    const { value, name } = target;
+  handleEditTime (event) {
+    const { target } = event
+    const { value, name } = target
     const newTime = this.state.currentTime
 
     if (name === 'hour') newTime.setHours(value)
@@ -39,36 +38,33 @@ class EditableTime extends React.Component {
       this.props.handleTimeChange(this.state.currentTime.getTime())
     })
 
-
-
     // this.setState({
     //   hour: Number(value)
     // }, () => {
     //   this.updateUnits(event);
     // });
-
   }
 
-  render() {
-    let hour = this.state.currentTime.getHours();
-    const minute = this.state.currentTime.getMinutes();
-    const second = this.state.currentTime.getSeconds();
-    return(
-      <div className="EditableTime">
-        <span className="hours">
+  render () {
+    const hour = this.state.currentTime.getHours()
+    const minute = this.state.currentTime.getMinutes()
+    const second = this.state.currentTime.getSeconds()
+    return (
+      <div className='EditableTime'>
+        <span className='hours'>
           <input
-            type="number"
-            name="hour"
-            aria-label="hour-input"
+            type='number'
+            name='hour'
+            aria-label='hour-input'
             value={hour}
             onChange={this.handleEditTime}
           />
         </span>
-        <span className="minutes">
+        <span className='minutes'>
           <input
-            type="number"
-            name="minute"
-            aria-label="minute-input"
+            type='number'
+            name='minute'
+            aria-label='minute-input'
             value={minute}
             onChange={this.handleEditTime}
           />
@@ -92,7 +88,6 @@ class EditableTime extends React.Component {
       </div>
     )
   }
-
 }
 
-export default EditableTime;
+export default EditableTime

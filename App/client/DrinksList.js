@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-function DrinksList(props) {
+function DrinksList (props) {
   return (
-    <section className="drinks-list">
-      <table className="center">
+    <section className='drinks-list'>
+      <table className='center'>
         <tbody>
           {props.drinkStore.map((drink, index) =>
             <tr key={index}>
-              <td className="drink-bullet"></td>
-              <td className="drink-cell">Drink {index+1}:</td>
-              <td className="drink-cell">{drink.units} Units</td>
-              <td className="drink-cell">{new Date(drink.timeStamp).toLocaleTimeString()}</td>
+              <td className='drink-bullet' />
+              <td className='drink-cell'>Drink {index + 1}:</td>
+              <td className='drink-cell'>{drink.units} Units</td>
+              <td className='drink-cell'>{new Date(drink.timeStamp).toLocaleTimeString()}</td>
             </tr>
           )}
         </tbody>
@@ -19,4 +19,4 @@ function DrinksList(props) {
   )
 }
 
-export default DrinksList;
+export default DrinksList
