@@ -44,7 +44,7 @@ class DrinkCalculator extends React.Component {
   render() {
     return (
       <section className="DrinkCalculator">
-        <form onSubmit={(event) => this.props.handleSaveDrink(event, this.state.units, this.state.drinkTime)}>
+        <form onSubmit={event => this.props.handleSaveDrink(event, this.state.units, this.state.drinkTime)}>
           <label>
               Quantity
               <input
@@ -77,10 +77,11 @@ class DrinkCalculator extends React.Component {
           <input type="submit" value="Add drink" className="save-drink" />
           {
             this.state.totalUnits > 0
-            ? (<div className="total-units" >Total units = {this.state.totalUnits}</div>)
-            : null
+              ? (<div className="total-units" >Total units = {this.state.totalUnits}</div>)
+              : null
           }
         </form>
+        <button onClick={() => this.props.handleRemoveLastDrink()}> Remove the last drink</button>
       </section>
     );
   }

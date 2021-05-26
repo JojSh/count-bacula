@@ -17,6 +17,7 @@ class App extends React.Component {
     }
 
     this.handleSaveDrink = this.handleSaveDrink.bind(this);
+    this.handleRemoveLastDrink = this.handleRemoveLastDrink.bind(this);
   }
 
   handleSaveDrink(event, units, timeStamp) {
@@ -25,16 +26,34 @@ class App extends React.Component {
       units: units,
       timeStamp: timeStamp,
     }
+
     const unitsToSave = Number((this.state.totalUnits + drinkToSave.units).toFixed(3))
-    const bedTimeToday = new Date()
-    bedTimeToday.setHours(23)
-    bedTimeToday.setMinutes(0)
 
     this.setState(() => ({
       drinkStore: [...this.state.drinkStore, drinkToSave],
       totalUnits: unitsToSave,
-      bedTimeUnits: calcUnitsMetabBy(unitsToSave, bedTimeToday, timeStamp)
+      bedTimeUnits: calcUnitsMetabBy(unitsToSave, this.getBedTimeToday(), timeStamp)
     }));
+  }
+
+  handleRemoveLastDrink () {
+    const { drinkStore, totalUnits } = this.state
+    if (!drinkStore.length) return
+    const indexOfDrinkToRemove = drinkStore.length - 1
+    const drinkToBeRemoved = drinkStore[indexOfDrinkToRemove]
+    const drinksAfterLastRemoved = drinkStore.slice(0, indexOfDrinkToRemove)
+    const unitsToSave = Number((totalUnits - drinkToBeRemoved.units).toFixed(3))
+    this.setState(() => ({
+      drinkStore: drinksAfterLastRemoved,
+      totalUnits: unitsToSave
+    }));
+  }
+
+  getBedTimeToday () {
+    const bedTimeToday = new Date()
+    bedTimeToday.setHours(23)
+    bedTimeToday.setMinutes(0)
+    return bedTimeToday
   }
 
   render() {
@@ -46,7 +65,7 @@ class App extends React.Component {
           </p>
         </header>
         <div className="top-row">
-          <DrinkCalculator handleSaveDrink={this.handleSaveDrink}/>
+          <DrinkCalculator handleSaveDrink={this.handleSaveDrink} handleRemoveLastDrink={this.handleRemoveLastDrink}/>
           <TotalUnits totalUnits={this.state.totalUnits}/>
           <Clock />
         </div>
