@@ -38,5 +38,23 @@ it('adds total units for multiple saved drinks', async () => {
   fireEvent.click(screen.getByText('Add drink'))
 
   await waitFor(() => screen.getByLabelText('total-units'))
-  expect(screen.getByLabelText('total-units')).toHaveTextContent('4.84')
+  expect(screen.getByLabelText('total-units')).toHaveTextContent('Total Units: 4.84')
+})
+
+it('adds a drink at given time', async () => {
+  const app = render(<App />)
+  const abvInput = app.getByLabelText('abv-input')
+  const quantityInput = app.getByLabelText('quantity-input')
+
+  const hourInput = app.getByLabelText('hour-input')
+  const minuteInput = app.getByLabelText('minute-input')
+
+  fireEvent.change(quantityInput, { target: { value: '500' } })
+  fireEvent.change(abvInput, { target: { value: '4' } })
+  fireEvent.change(hourInput, { target: { value: '21' } })
+  fireEvent.change(minuteInput, { target: { value: '00' } })
+  fireEvent.click(screen.getByText('Add drink'))
+
+  await waitFor(() => screen.getByLabelText('total-units'))
+  expect(screen.getByLabelText('total-bed-time-units')).toHaveTextContent('Units remaining: 1')
 })

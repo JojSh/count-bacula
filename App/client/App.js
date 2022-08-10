@@ -51,7 +51,7 @@ class App extends React.Component {
 
   getBedTimeToday () {
     const bedTimeToday = new Date()
-    bedTimeToday.setHours(23)
+    bedTimeToday.setHours(22)
     bedTimeToday.setMinutes(0)
     return bedTimeToday
   }

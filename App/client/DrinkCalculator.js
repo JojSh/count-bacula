@@ -9,7 +9,7 @@ class DrinkCalculator extends React.Component {
       quantity: 500,
       abv: 4,
       units: '',
-      drinkTime: new Date().getTime(),
+      drinkTime: new Date(),
       totalUnits: 0
     }
 
@@ -67,7 +67,7 @@ class DrinkCalculator extends React.Component {
             />
             %
           </label>
-          <label>
+          <label>Finished at:
             <EditableTime onTimeChange={this.handleTimeChange} />
           </label>
           <div

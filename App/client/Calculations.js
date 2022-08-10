@@ -8,9 +8,16 @@ export function calcUnitsMetabBy (unitsInBody, timeTo, timeFrom) {
 
   const secondsToBedtime = getSecondsTo(timeTo, timeFrom)
   const unitsRemainingAtBedTime = unitsInBody - (secondsToBedtime * UNITS_METAB_PER_SEC)
-  return Number(unitsRemainingAtBedTime.toFixed(3))
+  return Number(unitsRemainingAtBedTime.toFixed(2))
+}
+
+function flattenTime (dateObject) {
+  dateObject.setSeconds(0)
+  dateObject.setMilliseconds(0)
+  return dateObject
 }
 
 function getSecondsTo (timeTo, timeFrom) {
-  return (timeTo - timeFrom) / 1000
+  const secToBedTimeFloat = (flattenTime(timeTo) - flattenTime(timeFrom)) / 1000
+  return Math.round(secToBedTimeFloat)
 }

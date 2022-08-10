@@ -35,7 +35,7 @@ class EditableTime extends React.Component {
     this.setState({
       currentTime: newTime
     }, () => {
-      this.props.onTimeChange(this.state.currentTime.getTime())
+      this.props.onTimeChange(this.state.currentTime)
     })
 
     // this.setState({
